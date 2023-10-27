@@ -13,21 +13,7 @@
 		<section id="lewy1">
 			<h3>Ryby zamieszkujące rzeki</h3>
 		</section>
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
             <ol>
 			<?php
 				 $con = mysqli_connect('localhost', 'root', '', 'wedkowanie');
@@ -35,7 +21,7 @@
 				 $q1 = "SELECT ryby.nazwa, lowisko.akwen, lowisko.wojewodztwo FROM ryby INNER JOIN lowisko ON ryby.id = lowisko.Ryby_id WHERE lowisko.rodzaj = 3;";
 				 $res1 = mysqli_query($con, $q1);
 				//  $liczba_wierszy = mysqli_num_rows($res1);
-				//  if($liczba_wierszy > 0){
+				//  if(rezultat and $liczba_wierszy > 0){
 				// 	while($liczba_wierszy  mysql_fetch_row ($res1)){
 				// 		echo '<li'.$liczba_wierszy[0].'plywa w rzece'.$liczba_wierszy[1].''.$liczba_wierszy[2].
 				// 	}
@@ -59,17 +45,32 @@
 		</section>
 		<section id="lewy2">
 			<h3>Ryby drapieżne naszych wód</h3>
-			<form action="" method="GET">
+			<form id="lifestyle" action="" method="POST">
 
 
-<select name="place">
-<option value="stawy">Stawy</option>
-<option value="rzeki">Rzeki</option>
-<option value="jeziora">Jeziora</option>
-<option value="morza">Morza</option>
-<option value="ocenay">Oceany</option>
+<label for="fishselect">Ryby</label>
+<select id="fishselect" name="fishlifestyl">
+<option value="0">Wszystkie</option>
+<option value="1">Drapieżne</option>
+<option value="2">Spokojnego żeru </option>
+
 </select>
+<input type="submit" value="Pokaż">
 </form>
+<?php
+if($_SERVER['REQUEST_METHOD']== 'POST ' and $_POST['lifestyle']==0) {echo  'selected';} 
+if($_SERVER['REQUEST_METHOD']== 'POST ' and $_POST['lifestyle']==1) {echo  'selected';} 
+if($_SERVER['REQUEST_METHOD']== 'POST ' and $_POST['lifestyle']==2) {echo  'selected';} 
+	$rodzaj_zeru = $_POST ['lifestyle'];
+	if($rodzaj_zeru==0){
+		$sql= ""
+		
+	$sql= "SELECT id, nazwa,wystepowanie from ryby where styl_zycia = $rodzaj_zeru";
+}
+
+
+
+?>
 
 
 
@@ -85,7 +86,7 @@
 				 
 				while ($row = mysqli_fetch_array($res2)) {
 					//  $liczba_wierszy = mysqli_num_rows($res1);
-				//  if($liczba_wierszy > 0){
+				//  if(rezultat and $liczba_wierszy > 0){
 				// 	while($liczba_wierszy  mysql_fetch_row ($res1)){
 				// 		echo '<li'.$liczba_wierszy[0].'plywa w rzece'.$liczba_wierszy[1].''.$liczba_wierszy[2].
 				// 	}
@@ -103,6 +104,11 @@
 				
 			</table>
 		</section>
+		
+
+
+
+		
 	</main>
    
 	<footer>
